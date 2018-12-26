@@ -33,7 +33,7 @@ class ViewController: UIViewController {
             
             if let categories = response.value(forKey: "categories") as? NSArray {
                 for i in 0 ..< categories.count {
-                    let categorie = HeadyCategorie(dict: categories[i] as! NSDictionary)
+                    let categorie = HeadyCategorie(dict: categories[i] as! NSDictionary, ranking: response.value(forKey: "rankings") as! NSArray )
                     print(categorie)
                     self.categories.append(categorie)
                     }

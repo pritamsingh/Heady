@@ -21,16 +21,19 @@ struct HeadyCategorie : Categorie {
     
     var name: String
     
-    init(dict : NSDictionary) {
+    init(dict : NSDictionary,ranking:NSArray) {
         id = dict.value(forKey: "id") as! Int
         name = dict.value(forKey: "name") as! String
         products = [IProduct]()
 
         if let productsArray = dict.value(forKey: "products") as? NSArray {
             for i in 0 ..< productsArray.count {
-                let product =  IProduct(productsArray[i] as! NSDictionary) // Product(productsArray.count[i])
+                let product =  IProduct(productsArray[i] as! NSDictionary, ranking: ranking) // Product(productsArray.count[i])
+                
                 self.products.append(product)
             }
         }
+         self.products =  self.products.sorted{($1.viewCount > $0.viewCount) && ($1.orderCount > $0.orderCount)  }
+      
     }
 }
